@@ -19,7 +19,7 @@ export const Username = styled.h2`
 
 export const Values = styled.div`
     margin-top: 40px;
-    padding: 0 20px;
+    padding: 0 16px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     font-weight: bold;
@@ -36,7 +36,7 @@ export const Vright = styled.div`
 
 export const MainValue = styled.h3<Props>`
      color: ${(props) => (props.$negative ? '#8d1b1b' : '#5eb090')};
-     font-size: 46px;
+     font-size: 40px;
 `
 
 export const MoreOptions = styled.p`
