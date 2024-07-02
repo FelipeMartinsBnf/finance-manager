@@ -70,3 +70,27 @@ export const Inputs = styled.div`
         max-width: 60%;
     }
 `
+export const BtnsDiv = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+    background-color: transparent;
+
+    :first-child{
+        background-color: #5EB090;
+        font-size: 24px;
+        color: #fff;
+        border-radius: 20px;
+        border: none;
+        padding: 8px;
+    }
+    :last-child{
+        background-color: #8d1b1b;
+        color:#fff;
+        font-size: 20px;
+        border-radius: 20px;
+        border: none;
+    }
+`
+
