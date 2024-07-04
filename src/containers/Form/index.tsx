@@ -1,13 +1,15 @@
 import { useState } from "react"
-import { Btn, ModalDiv, FormHeader, Inputs,BtnsDiv } from "./styles"
-import { MainTitle } from "../Header/styles"
+import { Btn, ModalDiv, FormHeader, Inputs,BtnsDiv, ValueInput, NameInput } from "./styles"
 import { useDispatch } from "react-redux"
 import { add, withdraw } from "../../store/reducers/currentMoney"
+import { addToHistory } from "../../store/reducers/history"
+import { Types } from "../../models/Transaction"
 
 const Form = () => {
 
     const [modal, setModal] = useState(false)
     const [inputNum, setInputNum] = useState(0)
+    const [name, setname] = useState('')
 
     const dispatch = useDispatch()
 
@@ -17,11 +19,26 @@ const Form = () => {
 
     function addValue(){
         dispatch(add(inputNum))
+        createTransactionObject(Types.ingoing)
+        setInputNum(0)
+        setname('')
         setModal(false)
     }
     function decreseValue(){
         dispatch(withdraw(inputNum))
+        createTransactionObject(Types.outgoing)
+        setInputNum(0)
+        setname('')
         setModal(false)
+    }
+
+    function createTransactionObject(type: Types.ingoing | Types.outgoing){
+        dispatch(addToHistory({
+            value: inputNum,
+            type: type,
+            name: name,
+            dateTime: Date()
+        }))
     }
 
     return(
@@ -36,7 +53,8 @@ const Form = () => {
                     </FormHeader>
                     <Inputs>
                         <label htmlFor="">R$: </label>
-                        <input  placeholder="00,00" type="number" value={inputNum} onChange={(e) => setInputNum(parseFloat(e.target.value))}/>
+                        <ValueInput  placeholder="00,00" type="number" autoFocus value={inputNum} onChange={(e) => setInputNum(parseFloat(e.target.value))}/>
+                        <NameInput type="text" placeholder="Descrição.." value={name} onChange={(e) => setname(e.target.value)} />
                         <BtnsDiv>
                             <button onClick={() => addValue()}>Entrada</button>
                             <button onClick={() => decreseValue()}>Saida</button>

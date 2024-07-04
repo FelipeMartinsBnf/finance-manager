@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import currentMoneyReducer from "./reducers/currentMoney";
+import historyReducer from "./reducers/history";
 
 
 const store = configureStore({
     reducer: {
-        currentMoney: currentMoneyReducer
+        currentMoney: currentMoneyReducer,
+        history: historyReducer
     }
 })
 

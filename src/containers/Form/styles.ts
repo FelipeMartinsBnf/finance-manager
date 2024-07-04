@@ -36,7 +36,7 @@ export const FormHeader = styled.div`
     font-size: 46px;
     font-weight: bold;
     display: grid;
-    grid-template-columns: 70% 20%;
+    grid-template-columns: 70% 30%;
     :first-child{
         background-color: transparent;
     }
@@ -55,21 +55,35 @@ export const Inputs = styled.div`
     padding: 0px 12px;
     background-color: transparent;
     font-size: 36px;
-    color: #5EB090;
+    color: #3c6ca8;
     text-align: center;
     label{
         background-color: transparent;
     }
     input{
-        font-weight: bold;
         background-color: transparent;
-        border: none;
-        font-size: 50px;
-        color: #5EB090;
-        text-align: right;
-        max-width: 60%;
     }
 `
+
+export const ValueInput = styled.input`
+    font-weight: bold;
+    border: none;
+    font-size: 50px;
+    color: #3c6ca8;
+    text-align: right;
+    max-width: 60%;
+    
+`
+
+export const NameInput = styled.input`
+    font-size: 26px;
+    margin-top: 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0, 0.2);
+    padding: 6px;
+    color: #3c6ca8;
+`
+
 export const BtnsDiv = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;

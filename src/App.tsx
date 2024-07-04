@@ -13,7 +13,6 @@ function App() {
             <GlobalStyle />
             <Header />
             <ExpensesList />
-            <ExpensesList />
             <Form />
         </MainDiv>
     </Provider>

@@ -1,7 +1,12 @@
 import styled from "styled-components"
+import { Types } from "../../models/Transaction"
 
-type Props ={
+type PropsDropdown ={
     opend: boolean
+}
+
+type PropsMoney = {
+    type: Types.ingoing | Types.outgoing
 }
 
 export const ExpensesL = styled.div`
@@ -13,7 +18,7 @@ export const ExpensesL = styled.div`
     }
 `
 
-export const Dropdown = styled.div<Props>`
+export const Dropdown = styled.div<PropsDropdown>`
     margin-top: 20px;
     padding: 20px;
     border-radius: 20px;
@@ -56,5 +61,9 @@ export const ListItem = styled.div`
     padding: 12px 10px;
     margin: 6px 0;
     color: #3c6ca8;
-    grid-template-columns: 70% 20%;
+    grid-template-columns: 70% 30%;
+`
+
+export const MoneyDiv = styled.div<PropsMoney>`
+    color: ${(props) => props.type === Types.ingoing ? '#5EB090' : '#8d1b1b' };
 `

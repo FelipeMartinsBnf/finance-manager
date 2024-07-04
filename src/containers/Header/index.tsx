@@ -12,10 +12,9 @@ const Header = () => {
                 <MainTitle>Bem Vindo!</MainTitle>
                 <Username>Felipe Martins</Username>
             </HeaderDiv>
-            <MainValue>R$: {ingoing-outgoing}</MainValue>
             <Values>
-                <Vleft><MainValue>{ingoing}</MainValue><p>Saldo Atual</p></Vleft>
-                <Vright><MainValue $negative>{outgoing}</MainValue><p>Total das Despesas</p></Vright>
+                <Vleft><MainValue>R$: {ingoing - outgoing}</MainValue><p>Saldo Atual</p></Vleft>
+                <Vright><MainValue $negative>R$: {outgoing}</MainValue><p>Total das Despesas</p></Vright>
             </Values>
             <MoreOptions>+ mais detalhes</MoreOptions>
             <HeaderLine />
