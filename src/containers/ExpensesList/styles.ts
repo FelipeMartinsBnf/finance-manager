@@ -51,7 +51,9 @@ export const ListDiv = styled.div`
     transition: max-height 0.3s ease-out;
     
 `
-
+export const ListDay = styled.div`
+    background-color: #EAB2BB;
+`
 
 export const ListItem = styled.div`
     background-color: #fffcf6;
@@ -62,8 +64,21 @@ export const ListItem = styled.div`
     margin: 6px 0;
     color: #3c6ca8;
     grid-template-columns: 70% 30%;
+    margin: 20px 0;
 `
 
 export const MoneyDiv = styled.div<PropsMoney>`
     color: ${(props) => props.type === Types.ingoing ? '#5EB090' : '#8d1b1b' };
+`
+
+export const DataInfo = styled.p`
+    margin: 0px 10px;
+    padding: 8px;
+    max-width: 90%;
+    color: #3c6ca8;
+    background-color: transparent;
+    border-bottom: 1px solid #3c6ca8;
+`
+export const DateInfo = styled.p`
+    font-size: 12px;
 `

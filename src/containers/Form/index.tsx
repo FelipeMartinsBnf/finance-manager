@@ -1,14 +1,15 @@
 import { useState } from "react"
-import { Btn, ModalDiv, FormHeader, Inputs,BtnsDiv, ValueInput, NameInput } from "./styles"
+import { Btn, ModalDiv, FormHeader, Inputs,BtnsDiv, NameInput } from "./styles"
 import { useDispatch } from "react-redux"
 import { add, withdraw } from "../../store/reducers/currentMoney"
 import { addToHistory } from "../../store/reducers/history"
 import { Types } from "../../models/Transaction"
+import CurrencyInput from "../../components/CurrencyInput"
 
 const Form = () => {
 
     const [modal, setModal] = useState(false)
-    const [inputNum, setInputNum] = useState(0)
+    const [inputNum, setInputNum] = useState(NaN)
     const [name, setname] = useState('')
 
     const dispatch = useDispatch()
@@ -53,7 +54,7 @@ const Form = () => {
                     </FormHeader>
                     <Inputs>
                         <label htmlFor="">R$: </label>
-                        <ValueInput  placeholder="00,00" type="number" autoFocus value={inputNum} onChange={(e) => setInputNum(parseFloat(e.target.value))}/>
+                        <CurrencyInput state={inputNum} setInputNum={setInputNum} />
                         <NameInput type="text" placeholder="Descrição.." value={name} onChange={(e) => setname(e.target.value)} />
                         <BtnsDiv>
                             <button onClick={() => addValue()}>Entrada</button>

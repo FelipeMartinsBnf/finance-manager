@@ -1,12 +1,48 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import transaction from "../../models/Transaction"
+import transaction, { Types } from "../../models/Transaction"
 
 type transactionState = {
     itens: transaction[]
 }
 
 const initialState: transactionState = {
-    itens: []
+    itens: [
+        {
+            id: 0,
+            name: 'Testando',
+            value: 350,
+            type: Types.outgoing,
+            dateTime: 'Date Mon Jul 01 2024 01:00:26 GMT-0300 (Brasilia Standard Time)'
+        },
+                {
+            id: 0,
+            name: 'Testando',
+            value: 350,
+            type: Types.outgoing,
+            dateTime: 'Date Mon Jul 01 2024 14:00:26 GMT-0300 (Brasilia Standard Time)'
+        },
+                {
+            id: 0,
+            name: 'Testando',
+            value: 350,
+            type: Types.outgoing,
+            dateTime: 'Date Mon Jul 04 2024 14:00:26 GMT-0300 (Brasilia Standard Time)'
+        },
+                {
+            id: 0,
+            name: 'Testando',
+            value: 350,
+            type: Types.outgoing,
+            dateTime: 'Date Mon Jul 06 2024 14:00:26 GMT-0300 (Brasilia Standard Time)'
+        },
+                {
+            id: 0,
+            name: 'Testando',
+            value: 350,
+            type: Types.outgoing,
+            dateTime: 'Date Mon Jul 08 2024 14:00:26 GMT-0300 (Brasilia Standard Time)'
+        }
+    ]
 }
 const historyReducer = createSlice({
     name:'history',

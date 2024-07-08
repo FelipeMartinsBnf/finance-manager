@@ -1,9 +1,14 @@
 import { useState } from 'react'
-import { ExpensesL, Dropdown, ListDiv, ListItem, MoneyDiv } from './styles'
+import { ExpensesL, Dropdown, ListDiv, ListItem, MoneyDiv, DataInfo, ListDay, DateInfo } from './styles'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { Types } from '../../models/Transaction'
+import Transaction, { Types } from '../../models/Transaction'
+import FormatDate from '../../utils/FormatDate'
 
+
+interface GroupedTransactions {
+  [key: string]: Transaction[];
+}
 
 const ExpensesList = () => {
 
@@ -14,30 +19,53 @@ const ExpensesList = () => {
 
     }
 
-    const HistoryItens = useSelector((state: RootReducer) => state.history.itens)
+    let HistoryItens = useSelector((state: RootReducer) => state.history.itens)
 
-    return(
+    const comprasAgrupadasPorData: GroupedTransactions = HistoryItens.reduce((acc: GroupedTransactions, item: Transaction) => {
+        const data = FormatDate(item.dateTime).slice(0, 9); // Considerando a data no formato 'dd/mm/yyyy'
+        if (!acc[data]) {
+            acc[data] = []
+        }
+        acc[data].push(item);
+        return acc;
+    }, {});
+
+
+     // Transformar o objeto em um array de entradas
+    const entradas = Object.entries(comprasAgrupadasPorData);
+
+    console.log(comprasAgrupadasPorData)
+
+    return (
         <ExpensesL>
-            <Dropdown onClick={() => switchDropdown() } opend={dropdown} className='red'>
-                Extrato das Despesas<span className="material-symbols-outlined">{dropdown ? ('arrow_drop_up'): ('arrow_drop_down')}</span>
+            <Dropdown onClick={() => switchDropdown()} opend={dropdown} className='red'>
+                Extrato das Despesas
+                <span className="material-symbols-outlined">
+                    {dropdown ? 'arrow_drop_up' : 'arrow_drop_down'}
+                </span>
             </Dropdown>
-            <ListDiv className={dropdown ? ('open'): ('')}>
-                {
-                    HistoryItens.length >= 1 ?
-                            HistoryItens.map((item) => (
-                                <>
-                                    {/* *Degug = {item.dateTime} */}
-                                    <ListItem>
-                                        <div>{item.name}</div>
-                                        <MoneyDiv type={item.type}>R$: {item.type === Types.outgoing ? ' -' : ''}{item.value}</MoneyDiv>
-                                    </ListItem>
-                                </>
-                            ))
-                    : (<ListItem> {'>'} Adicione uma Transação para ver o Histórico!</ListItem>)
-                }
+            <ListDiv className={dropdown ? 'open' : ''}>
+                {HistoryItens.length >= 1 ? (
+                    entradas.map(([data, compras]) => (
+                        <ListDay key={data}>
+                            <DataInfo>{data}</DataInfo>
+                            {compras.map((item) => (
+                                <ListItem key={item.id}>
+                                    <div>{item.name}</div>
+                                    <MoneyDiv type={item.type}>
+                                        R$: {item.type === Types.outgoing ? ' -' : ''}{item.value}
+                                    </MoneyDiv>
+                                    <DateInfo>{FormatDate(item.dateTime).slice(13)}</DateInfo>
+                                </ListItem>
+                            ))}
+                        </ListDay>
+                    ))
+                ) : (
+                    <ListItem> {'>'} Adicione uma Transação para ver o Histórico!</ListItem>
+                )}
             </ListDiv>
         </ExpensesL>
-    )
-}
+    );
+};
 
-export default ExpensesList
+export default ExpensesList;

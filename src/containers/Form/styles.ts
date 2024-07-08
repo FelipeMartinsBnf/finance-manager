@@ -65,15 +65,6 @@ export const Inputs = styled.div`
     }
 `
 
-export const ValueInput = styled.input`
-    font-weight: bold;
-    border: none;
-    font-size: 50px;
-    color: #3c6ca8;
-    text-align: right;
-    max-width: 60%;
-    
-`
 
 export const NameInput = styled.input`
     font-size: 26px;
