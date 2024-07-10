@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { FormatToFloat } from "../../utils/formatMoney";
 
 const currentMoneyReducer= createSlice({
     name:'currentMoney',
@@ -6,11 +7,13 @@ const currentMoneyReducer= createSlice({
         ingoing: 0.00,
         outgoing: 0.00},
     reducers: {
-        add: (state, action: PayloadAction<number>) => {
-            state.ingoing += action.payload
+        add: (state, action: PayloadAction<string>) => {
+            const NumberValue = FormatToFloat(action.payload)
+            state.ingoing =  Math.round((state.ingoing + NumberValue) * 100) /100
         },
-        withdraw: (state, action: PayloadAction<number>) => {
-            state.outgoing += action.payload
+        withdraw: (state, action: PayloadAction<string>) => {
+            const NumberValue = FormatToFloat(action.payload)
+            state.outgoing = Math.round((state.ingoing - NumberValue) * 100) /100
         }
     }
 })

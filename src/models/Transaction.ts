@@ -5,7 +5,7 @@ export enum Types {
 
 class transaction {
     id: number
-    value: number
+    value: string
     name: string
     dateTime: string
     type: Types
@@ -13,7 +13,7 @@ class transaction {
 
     constructor(
          id: number,
-        value: number,
+        value: string,
         name: string,
         dateTime: string,
         type: Types,

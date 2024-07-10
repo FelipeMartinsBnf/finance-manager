@@ -34,8 +34,6 @@ const ExpensesList = () => {
      // Transformar o objeto em um array de entradas
     const entradas = Object.entries(comprasAgrupadasPorData);
 
-    console.log(comprasAgrupadasPorData)
-
     return (
         <ExpensesL>
             <Dropdown onClick={() => switchDropdown()} opend={dropdown} className='red'>
