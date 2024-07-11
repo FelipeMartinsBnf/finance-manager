@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { ExpensesL, Dropdown, ListDiv, ListItem, MoneyDiv, DataInfo, ListDay, DateInfo } from './styles'
+import { ExpensesL, Dropdown, ListDiv, ListItem, MoneyDiv, DataInfo, DateInfo } from './styles'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
 import Transaction, { Types } from '../../models/Transaction'
 import FormatDate from '../../utils/FormatDate'
+import Tag from '../../components/Tag'
 
 
 interface GroupedTransactions {
@@ -45,21 +46,33 @@ const ExpensesList = () => {
             <ListDiv className={dropdown ? 'open' : ''}>
                 {HistoryItens.length >= 1 ? (
                     entradas.map(([data, compras]) => (
-                        <ListDay key={data}>
+                        <div key={data}>
                             <DataInfo>{data}</DataInfo>
                             {compras.map((item) => (
                                 <ListItem key={item.id}>
+                                    <MoneyDiv type={item.type} className="material-symbols-outlined">
+                                        {item.type === Types.ingoing ? 'arrow_circle_up' : 'arrow_circle_down'}
+                                    </MoneyDiv>
                                     <div>{item.name}</div>
                                     <MoneyDiv type={item.type}>
                                         R$: {item.type === Types.outgoing ? ' -' : ''}{item.value}
                                     </MoneyDiv>
                                     <DateInfo>{FormatDate(item.dateTime).slice(13)}</DateInfo>
+                                    <div>
+                                        <Tag>Tag 1</Tag>
+                                        <Tag>Tag 2</Tag>
+                                        <Tag>Tag 3</Tag>
+                                    </div>
                                 </ListItem>
                             ))}
-                        </ListDay>
+                        </div>
                     ))
                 ) : (
-                    <ListItem> {'>'} Adicione uma Transação para ver o Histórico!</ListItem>
+                    <ListItem>
+                        <div></div> 
+                        {'>'} Adicione uma Transação para ver o Histórico!
+                    </ListItem>
+
                 )}
             </ListDiv>
         </ExpensesL>

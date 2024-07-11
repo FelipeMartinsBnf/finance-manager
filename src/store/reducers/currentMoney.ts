@@ -13,7 +13,7 @@ const currentMoneyReducer= createSlice({
         },
         withdraw: (state, action: PayloadAction<string>) => {
             const NumberValue = FormatToFloat(action.payload)
-            state.outgoing = Math.round((state.ingoing - NumberValue) * 100) /100
+            state.outgoing = Math.round((state.outgoing + NumberValue) * 100) /100
         }
     }
 })

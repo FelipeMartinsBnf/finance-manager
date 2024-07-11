@@ -11,10 +11,10 @@ type PropsMoney = {
 
 export const ExpensesL = styled.div`
     .open{
-        padding: 0px 10px;
-        max-height: 100vw; /* Ajuste conforme necessário para o tamanho do conteúdo */
+        padding: 0px 4px;
+        max-height: 150vw; /* Ajuste conforme necessário para o tamanho do conteúdo */
         overflow-y: scroll;
-        transition: max-height 0.8s ease-in;
+        transition: max-height 0.4s ease-in;
     }
 `
 
@@ -25,7 +25,7 @@ export const Dropdown = styled.div<PropsDropdown>`
     border-bottom-right-radius: ${(props) => props.opend ? ('0px'):('20px')};
     border-bottom-left-radius: ${(props) => props.opend ? ('0px'):('20px')};
     transition: border-radius 0.3s ease-out;
-    background-color: #EAB2BB;
+    background-color: #fffcf6;
     font-size: 20px;
     color: #3c6ca8;
     font-weight: 300;
@@ -34,13 +34,14 @@ export const Dropdown = styled.div<PropsDropdown>`
     span{
         padding-left: 20%;
         background-color: transparent;
+        color: #EAB2BB;
         font-size: 30px;
         vertical-align: middle;
     }
     `
 
 export const ListDiv = styled.div`
-    background-color: #EAB2BB;
+    background-color: #fffcf6;
     
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -51,20 +52,17 @@ export const ListDiv = styled.div`
     transition: max-height 0.3s ease-out;
     
 `
-export const ListDay = styled.div`
-    background-color: #EAB2BB;
-`
 
 export const ListItem = styled.div`
     background-color: #fffcf6;
     border-radius: 20px;
-    font-size: 20px;
+    font-size: 17px;
     display: grid;
-    padding: 12px 10px;
+    padding: 8px 8px;
     margin: 6px 0;
     color: #3c6ca8;
-    grid-template-columns: 70% 30%;
-    margin: 20px 0;
+    grid-template-columns: 10% 60% 30%;
+    margin: 12px 0;
 `
 
 export const MoneyDiv = styled.div<PropsMoney>`
@@ -72,13 +70,16 @@ export const MoneyDiv = styled.div<PropsMoney>`
 `
 
 export const DataInfo = styled.p`
-    margin: 0px 10px;
+    margin: 0px 20px;
     padding: 8px;
     max-width: 90%;
-    color: #3c6ca8;
+    color: #000;
     background-color: transparent;
     border-bottom: 1px solid #3c6ca8;
 `
 export const DateInfo = styled.p`
+    padding-top: 25%;
     font-size: 12px;
+    color: #000;
 `
+
