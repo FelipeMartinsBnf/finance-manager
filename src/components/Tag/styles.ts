@@ -12,4 +12,5 @@ export const TagElement = styled.span<Props>`
     padding: 1px 8px;
     border-radius: 10px;
     margin: 0 2px;
+    text-align: center;
 `

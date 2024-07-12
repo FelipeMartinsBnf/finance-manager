@@ -108,3 +108,18 @@ export const BtnsDiv = styled.div`
     }
 `
 
+export const TagsDiv = styled.div`
+    font-size: 20px;
+    text-align: left;
+    padding: 0 12px;
+    margin-top: 26px;
+`
+
+export const TagsGrid = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    span{
+        margin: 4px 10px;
+    }
+`

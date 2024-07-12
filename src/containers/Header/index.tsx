@@ -11,7 +11,7 @@ const Header = () => {
         <header>
             <HeaderDiv>
                 <MainTitle>Bem Vindo!</MainTitle>
-                <Username>Felipe Martins</Username>
+                <Username>Username</Username>
             </HeaderDiv>
             <Values>
                 <ValueItem><MainValue>R$: {formatMoney((ingoing - outgoing).toFixed(2))}</MainValue><p>Saldo Atual</p></ValueItem>
