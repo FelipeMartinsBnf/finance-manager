@@ -5,6 +5,7 @@ import { RootReducer } from '../../store'
 import Transaction, { Types } from '../../models/Transaction'
 import FormatDate from '../../utils/FormatDate'
 import Tag from '../../components/Tag'
+import { Transition, TransitionStatus } from 'react-transition-group'
 
 
 interface GroupedTransactions {
@@ -21,6 +22,7 @@ const ExpensesList = () => {
     }
 
     let HistoryItens = useSelector((state: RootReducer) => state.history.itens)
+    const Tags = useSelector((state: RootReducer) => state.availableTags.TagsItens)
 
     const comprasAgrupadasPorData: GroupedTransactions = HistoryItens.reduce((acc: GroupedTransactions, item: Transaction) => {
         const data = FormatDate(item.dateTime).slice(0, 9); // Considerando a data no formato 'dd/mm/yyyy'
@@ -37,44 +39,49 @@ const ExpensesList = () => {
 
     return (
         <ExpensesL>
-            <Dropdown onClick={() => switchDropdown()} opend={dropdown} className='red'>
+            <Dropdown onClick={() => switchDropdown()} opend={dropdown} >
                 Extrato das Despesas
                 <span className="material-symbols-outlined">
                     {dropdown ? 'arrow_drop_up' : 'arrow_drop_down'}
                 </span>
             </Dropdown>
-            <ListDiv className={dropdown ? 'open' : ''}>
-                {HistoryItens.length >= 1 ? (
-                    entradas.map(([data, compras]) => (
-                        <div key={data}>
-                            <DataInfo>{data}</DataInfo>
-                            {compras.map((item) => (
-                                <ListItem key={item.id}>
-                                    <MoneyDiv type={item.type} className="material-symbols-outlined">
-                                        {item.type === Types.ingoing ? 'arrow_circle_up' : 'arrow_circle_down'}
-                                    </MoneyDiv>
-                                    <div>{item.name}</div>
-                                    <MoneyDiv type={item.type}>
-                                        R$: {item.type === Types.outgoing ? ' -' : ''}{item.value}
-                                    </MoneyDiv>
-                                    <DateInfo>{FormatDate(item.dateTime).slice(13)}</DateInfo>
-                                    <div>
-                                        <Tag>Tag 1</Tag>
-                                        <Tag>Tag 2</Tag>
-                                        <Tag>Tag 3</Tag>
-                                    </div>
-                                </ListItem>
-                            ))}
-                        </div>
-                    ))
-                ) : (
-                    <ListItem>
-                        <div></div> 
-                        {'>'} Adicione uma Transação para ver o Histórico!
-                    </ListItem>
+            <Transition in={dropdown} timeout={100} mountOnEnter unmountOnExit>
+                {(state: TransitionStatus) => 
+                 state !== 'unmounted' &&(
+                    <ListDiv state={state}>
+                        {HistoryItens.length >= 1 ? (
+                            entradas.map(([data, compras]) => (
+                                <div key={data}>
+                                    <DataInfo>{data}</DataInfo>
+                                    {compras.map((item) => (
+                                        <ListItem key={item.id}>
+                                            <MoneyDiv type={item.type} className="material-symbols-outlined">
+                                                {item.type === Types.ingoing ? 'arrow_circle_up' : 'arrow_circle_down'}
+                                            </MoneyDiv>
+                                            <div>{item.name}</div>
+                                            <MoneyDiv type={item.type}>
+                                                R$: {item.type === Types.outgoing ? ' -' : ''}{item.value}
+                                            </MoneyDiv>
+                                            <DateInfo>{FormatDate(item.dateTime).slice(13)}</DateInfo>
+                                            <div>
+                                                {Tags.map((item) => (
+                                                    <Tag color={item.color}>{item.content}</Tag>
+                                                ))}
+                                            </div>
+                                        </ListItem>
+                                    ))}
+                                </div>
+                            ))
+                        ) : (
+                            <ListItem>
+                                <div></div> 
+                                {'>'} Adicione uma Transação para ver o Histórico!
+                            </ListItem>
 
+                        )}
+                    </ListDiv>
                 )}
-            </ListDiv>
+            </Transition>
         </ExpensesL>
     );
 };

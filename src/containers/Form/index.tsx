@@ -5,6 +5,7 @@ import { add, withdraw } from "../../store/reducers/currentMoney";
 import { addToHistory } from "../../store/reducers/history";
 import { Types } from "../../models/Transaction";
 import CurrencyInput from "../../components/CurrencyInput";
+import { Transition, TransitionStatus } from 'react-transition-group'
 
 const Form = () => {
   const [modal, setModal] = useState(false);
@@ -38,7 +39,8 @@ const Form = () => {
       value: inputNum,
       type: type,
       name: name,
-      dateTime: new Date().toISOString()
+      dateTime: new Date().toISOString(),
+      tagsId: [0, 1]
     }));
   }
 
@@ -47,30 +49,34 @@ const Form = () => {
       <Btn onClick={() => renderModal()}>
         <span className="material-symbols-outlined">add</span>Nova Ação
       </Btn>
-      {modal && (
-        <ModalDiv>
-          <FormHeader>
-            <div>Adicionar Valor</div>
-            <div onClick={() => renderModal()}>
-              <span className="material-symbols-outlined">arrow_back_ios</span>
-            </div>
-          </FormHeader>
-          <Inputs>
-            <label htmlFor="">R$: </label>
-            <CurrencyInput state={inputNum} setInputNum={setInputNum} />
-            <NameInput
-              type="text"
-              placeholder="Descrição.."
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <BtnsDiv>
-              <button onClick={() => addValue()}>Entrada</button>
-              <button onClick={() => decreseValue()}>Saida</button>
-            </BtnsDiv>
-          </Inputs>
-        </ModalDiv>
-      )}
+      <Transition in={modal} timeout={100} mountOnEnter unmountOnExit>
+        {(state: TransitionStatus) => 
+            state !== 'unmounted' && (
+                <ModalDiv state={state}>
+                    <FormHeader>
+                        <div>Adicionar Valor</div>
+                        <div onClick={() => renderModal()}>
+                        <span className="material-symbols-outlined">arrow_back_ios</span>
+                        </div>
+                    </FormHeader>
+                    <Inputs>
+                        <label htmlFor="">R$: </label>
+                        <CurrencyInput state={inputNum} setInputNum={setInputNum} />
+                        <NameInput
+                        type="text"
+                        placeholder="Descrição.."
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        />
+                        <BtnsDiv>
+                            <button onClick={() => addValue()}>Entrada</button>
+                            <button onClick={() => decreseValue()}>Saida</button>
+                        </BtnsDiv>
+                    </Inputs>
+                </ModalDiv>
+            )
+        }
+        </Transition>
     </>
   );
 };

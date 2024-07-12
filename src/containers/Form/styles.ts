@@ -1,5 +1,11 @@
 import styled from "styled-components"
 
+
+export type ModalContentProps ={
+    state: 'entering' | 'entered' | 'exiting' | 'exited';
+}
+
+
 export const Btn = styled.div`
     position: fixed;
     bottom: 0;
@@ -17,7 +23,7 @@ export const Btn = styled.div`
     }
 `
 
-export const ModalDiv = styled.div`
+export const ModalDiv = styled.div<ModalContentProps>`
     position: fixed;
     top: 0;
     left: 0;
@@ -26,6 +32,9 @@ export const ModalDiv = styled.div`
     background-color: transparent;
     backdrop-filter: blur(15px);
     padding: 20px 0px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translateY(${({ state }) => (state === 'entering' ? '100%' : '0')});
+    opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
 `
 
 export const FormHeader = styled.div`

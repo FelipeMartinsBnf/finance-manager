@@ -1,14 +1,16 @@
+import { Colors } from "../../models/Tags"
 import { TagElement } from "./styles"
 
 type Props = {
-    children: string
+    children: string,
+    color: Colors
 }
 
-const Tag = ({children}: Props) => {
+const Tag = ({children, color}: Props) => {
 
 
     return (
-        <TagElement>{children}</TagElement>
+        <TagElement color={color}>{children}</TagElement>
     )
 }
 

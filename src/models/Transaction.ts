@@ -9,7 +9,7 @@ class transaction {
     name: string
     dateTime: string
     type: Types
-    //tags e etc
+    tagsId: number[]
 
     constructor(
          id: number,
@@ -17,12 +17,14 @@ class transaction {
         name: string,
         dateTime: string,
         type: Types,
+        tagsId: number[]
     ){
         this.id = id
         this.value = value
         this.name = name
         this.dateTime = dateTime
         this.type = type
+        this.tagsId = tagsId
     }
 }
 

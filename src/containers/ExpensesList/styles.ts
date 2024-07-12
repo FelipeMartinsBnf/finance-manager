@@ -9,13 +9,12 @@ type PropsMoney = {
     type: Types.ingoing | Types.outgoing
 }
 
+export type ModalContentProps = {
+    state: 'entering' | 'entered' | 'exiting' | 'exited';
+}
+
 export const ExpensesL = styled.div`
-    .open{
-        padding: 0px 4px;
-        max-height: 150vw; /* Ajuste conforme necessário para o tamanho do conteúdo */
-        overflow-y: scroll;
-        transition: max-height 0.4s ease-in;
-    }
+
 `
 
 export const Dropdown = styled.div<PropsDropdown>`
@@ -40,16 +39,18 @@ export const Dropdown = styled.div<PropsDropdown>`
     }
     `
 
-export const ListDiv = styled.div`
+export const ListDiv = styled.div<ModalContentProps>`
     background-color: #fffcf6;
     
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
 
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    padding: 0px 4px;
+    overflow-y: scroll;
+
+    transition: transform 1.0s ease, opacity 0.5s ease;
+    transform: translateY(${({ state }) => (state === 'entering' ? '-100%' : '0')});
+    opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
     
 `
 
@@ -78,7 +79,7 @@ export const DataInfo = styled.p`
     border-bottom: 1px solid #3c6ca8;
 `
 export const DateInfo = styled.p`
-    padding-top: 25%;
+    padding-top: 20%;
     font-size: 12px;
     color: #000;
 `

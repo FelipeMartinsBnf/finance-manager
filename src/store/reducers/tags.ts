@@ -10,7 +10,7 @@ const initialState: availableTagsState = {
         {
             id: 0,
             content: 'Pix',
-            color: Colors.Green
+            color: Colors.Blue
         },
         {
             id: 1,
