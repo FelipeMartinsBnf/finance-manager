@@ -16,12 +16,14 @@ import { Types } from '../../models/Transaction'
 import CurrencyInput from '../../components/CurrencyInput'
 import { Transition, TransitionStatus } from 'react-transition-group'
 import Tag from '../../components/Tag'
-import { Colors } from '../../models/Tags'
+import tags from '../../models/Tags'
+import AddTag from '../../components/Tag/AddTag'
 
 const Form = () => {
   const [modal, setModal] = useState(false)
   const [inputNum, setInputNum] = useState('')
   const [name, setName] = useState('')
+  const [selectedTags, setSelectedTags] = useState<tags[]>([])
 
   const dispatch = useDispatch()
 
@@ -35,6 +37,7 @@ const Form = () => {
     setInputNum('')
     setName('')
     setModal(false)
+    setSelectedTags([])
   }
 
   function decreseValue() {
@@ -43,6 +46,7 @@ const Form = () => {
     setInputNum('')
     setName('')
     setModal(false)
+    setSelectedTags([])
   }
 
   function createTransactionObject(type: Types.ingoing | Types.outgoing) {
@@ -52,9 +56,19 @@ const Form = () => {
         type: type,
         name: name,
         dateTime: new Date().toISOString(),
-        tagsId: [0, 1]
+        tagsId: selectedTags.map((i) => i.id)
       })
     )
+  }
+
+  function addToTags(i: tags) {
+    setSelectedTags([...selectedTags, i])
+  }
+  function removeTags(i: number) {
+    const filterById = (array: tags[], id: number): tags[] => {
+      return array.filter((tag) => tag.id !== id)
+    }
+    setSelectedTags(filterById(selectedTags, i))
   }
 
   return (
@@ -86,13 +100,15 @@ const Form = () => {
                 <TagsDiv>
                   <h3>Tags Selecionadas:</h3>
                   <TagsGrid>
-                    <Tag color={Colors.Black}>Gasolina</Tag>
-                    <Tag color={Colors.Green}>Pix</Tag>
-                    <Tag color={Colors.Yellow}>Cartão</Tag>
-                    <Tag color={Colors.Blue}>Comida</Tag>
-                    <Tag color={Colors.Red}>Ifood</Tag>
-                    <Tag color={Colors.Pink}>Festa</Tag>
+                    {selectedTags.map((item) => (
+                      <span key={item.id} onClick={() => removeTags(item.id)}>
+                        <Tag key={item.id} color={item.color}>
+                          {item.content}
+                        </Tag>
+                      </span>
+                    ))}
                   </TagsGrid>
+                  <AddTag add={addToTags} selected={selectedTags} />
                 </TagsDiv>
                 <BtnsDiv>
                   <button onClick={() => addValue()}>Entrada</button>

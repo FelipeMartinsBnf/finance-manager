@@ -14,6 +14,8 @@ import Transaction, { Types } from '../../models/Transaction'
 import FormatDate from '../../utils/FormatDate'
 import Tag from '../../components/Tag'
 import { Transition, TransitionStatus } from 'react-transition-group'
+import tags from '../../models/Tags'
+import { GetByid } from '../../utils/getTags'
 
 interface GroupedTransactions {
   [key: string]: Transaction[]
@@ -81,7 +83,7 @@ const ExpensesList = () => {
                           {FormatDate(item.dateTime).slice(13)}
                         </DateInfo>
                         <div>
-                          {Tags.map((item) => (
+                          {GetByid(item.tagsId, Tags).map((item: tags) => (
                             <Tag key={item.id} color={item.color}>
                               {item.content}
                             </Tag>
