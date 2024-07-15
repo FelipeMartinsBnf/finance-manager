@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components"
+import styled, { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
     *{
@@ -9,13 +9,17 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export const MainDiv = styled.div`
-    background: rgb(238,244,240);
-    background: linear-gradient(180deg, rgba(238,244,240,1) 10%, rgba(222,193,248,1) 100%);
-    min-height: 100vh;
-    max-width: 926px;
-    margin: 0 auto;
-    padding: 0 12px;
-    padding-bottom: 46px;
+  background: rgb(238, 244, 240);
+  background: linear-gradient(
+    180deg,
+    rgba(238, 244, 240, 1) 10%,
+    rgba(222, 193, 248, 1) 100%
+  );
+  min-height: 100vh;
+  max-width: 926px;
+  margin: 0 auto;
+  padding: 0 12px;
+  padding-bottom: 46px;
 `
 
 export default GlobalStyle

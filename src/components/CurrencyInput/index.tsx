@@ -1,19 +1,18 @@
-import React from "react";
-import { ValueInput } from "./styles";
-import { formatMoney } from "../../utils/formatMoney";
+import React from 'react'
+import { ValueInput } from './styles'
+import { formatMoney } from '../../utils/formatMoney'
 
 type Props = {
-  state: string;
-  setInputNum: (e: string) => void;
-};
+  state: string
+  setInputNum: (e: string) => void
+}
 
 const CurrencyInput: React.FC<Props> = ({ state, setInputNum }) => {
-  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const rawValue = event.target.value;
-    const formattedValue = formatMoney(rawValue);
-    setInputNum(formattedValue);
-  };
+    const rawValue = event.target.value
+    const formattedValue = formatMoney(rawValue)
+    setInputNum(formattedValue)
+  }
 
   return (
     <ValueInput
@@ -22,7 +21,7 @@ const CurrencyInput: React.FC<Props> = ({ state, setInputNum }) => {
       value={state}
       onChange={handleChange}
     />
-  );
-};
+  )
+}
 
-export default CurrencyInput;
+export default CurrencyInput
