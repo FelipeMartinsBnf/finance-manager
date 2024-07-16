@@ -73,3 +73,57 @@ export const NewTag = styled.button`
     margin-left: 4px;
   }
 `
+export const ModalTagDiv = styled.div`
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+`
+
+export const DivFormTags = styled.div`
+  position: fixed;
+  top: 40%;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 10px 15px;
+
+  input {
+    display: inline-block;
+  }
+
+  :first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 400;
+
+    span {
+      font-size: 20px;
+      margin-top: 0;
+    }
+  }
+
+  :last-child {
+    margin-top: 15px;
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 2px;
+
+    input {
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 5px;
+    }
+
+    .selected {
+      border: 1px solid red;
+    }
+  }
+`
