@@ -1,4 +1,10 @@
 export const formatMoney = (value: string): string => {
+  //Verificar se é negativo
+  let negative = false
+  if (value.indexOf('-') >= 0) {
+    negative = true
+  }
+
   const cleanValue = value.replace(/[^\d]/g, '') // Remove todos os caracteres não numéricos
   if (cleanValue === '') return ''
   const intValue = parseInt(cleanValue, 10)
@@ -10,7 +16,7 @@ export const formatMoney = (value: string): string => {
   const parts = formattedValue.split(',')
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 
-  return `${parts.join(',')}`
+  return `${negative ? '-' : ''}${parts.join(',')}`
 }
 
 export function FormatToFloat(value: string): number {
@@ -20,5 +26,3 @@ export function FormatToFloat(value: string): number {
   numberValue = Math.round(numberValue * 100) / 100
   return numberValue
 }
-
-export function floatToString() {}

@@ -24,8 +24,13 @@ const availableTagReducer = createSlice({
   name: 'availableTags',
   initialState,
   reducers: {
-    createNewTag: (state, action: PayloadAction<tags>) => {
-      state.TagsItens.push(action.payload)
+    createNewTag: (state, action: PayloadAction<Omit<tags, 'id'>>) => {
+      const lastItem = state.TagsItens[state.TagsItens.length - 1]
+      const newItem = {
+        ...action.payload,
+        id: lastItem ? lastItem.id + 1 : 1
+      }
+      state.TagsItens.push(newItem)
     }
   }
 })

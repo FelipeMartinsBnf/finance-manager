@@ -36,15 +36,18 @@ const AddTag = ({ add, selected }: Props) => {
       {addTagsDiv ? (
         <TagsDiv>
           <p>Aperte em uma tag para adicionar a esta ação</p>
-          {TagsArray.filter(
-            (tag) => !selected.some((selectedTag) => selectedTag.id === tag.id)
-          ).map((tag) => (
-            <span key={tag.id} onClick={() => add(tag)}>
-              <Tag key={tag.id} color={tag.color}>
-                {tag.content}
-              </Tag>
-            </span>
-          ))}
+          <div>
+            {TagsArray.filter(
+              (tag) =>
+                !selected.some((selectedTag) => selectedTag.id === tag.id)
+            ).map((tag) => (
+              <span key={tag.id} onClick={() => add(tag)}>
+                <Tag key={tag.id} color={tag.color}>
+                  {tag.content}
+                </Tag>
+              </span>
+            ))}
+          </div>
           <TagForm />
         </TagsDiv>
       ) : (

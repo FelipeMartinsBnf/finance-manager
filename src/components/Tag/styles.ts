@@ -5,6 +5,10 @@ type Props = {
   color: Colors
 }
 
+export type ModalContentProps = {
+  state: 'entering' | 'entered' | 'exiting' | 'exited'
+}
+
 export const TagElement = styled.span<Props>`
   font-size: 12px;
   background-color: ${(props) => props.color};
@@ -46,11 +50,17 @@ export const TagsDiv = styled.div`
   border-top-left-radius: 0;
   background-color: #fff;
   padding: 8px;
-
   p {
     font-size: 12px;
     color: black;
     font-weight: lighter;
+    display: flex;
+    flex-grow: 100%;
+  }
+
+  div {
+    display: flex;
+    flex-wrap: wrap;
   }
 
   span {
@@ -73,7 +83,7 @@ export const NewTag = styled.button`
     margin-left: 4px;
   }
 `
-export const ModalTagDiv = styled.div`
+export const ModalTagDiv = styled.div<ModalContentProps>`
   position: fixed;
   display: flex;
   justify-content: center;
@@ -82,12 +92,19 @@ export const ModalTagDiv = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease;
+  transform: translateY(
+    ${({ state }) => (state === 'entering' ? '100%' : '0')}
+  );
+  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
 `
 
 export const DivFormTags = styled.div`
   position: fixed;
-  top: 40%;
-  margin: 0 auto;
+  top: 30%;
+  margin: 0 10px;
   background-color: #fff;
   border-radius: 20px;
   padding: 10px 15px;
@@ -124,6 +141,20 @@ export const DivFormTags = styled.div`
 
     .selected {
       border: 1px solid red;
+    }
+
+    div {
+      margin-top: 8px;
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      margin-top: 10px;
+      background-color: #5eb090;
+      color: #fff;
+      border-radius: 10px;
+      font-weight: bold;
     }
   }
 `

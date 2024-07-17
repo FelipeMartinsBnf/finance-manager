@@ -16,7 +16,8 @@ const Header = () => {
   const { ingoing, outgoing } = useSelector(
     (state: RootReducer) => state.currentMoney
   )
-
+  console.log((ingoing - outgoing).toFixed(2))
+  console.log(formatMoney('-255.20'))
   return (
     <header>
       <HeaderDiv>
@@ -25,7 +26,7 @@ const Header = () => {
       </HeaderDiv>
       <Values>
         <ValueItem>
-          <MainValue>
+          <MainValue $negative={ingoing - outgoing >= 0 ? false : true}>
             R$: {formatMoney((ingoing - outgoing).toFixed(2))}
           </MainValue>
           <p>Saldo Atual</p>

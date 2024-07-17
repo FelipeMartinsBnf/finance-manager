@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Types } from '../../models/Transaction'
 
 type PropsDropdown = {
-  opend: boolean
+  $opend: boolean
 }
 
 type PropsMoney = {
@@ -19,8 +19,8 @@ export const Dropdown = styled.div<PropsDropdown>`
   margin-top: 20px;
   padding: 20px;
   border-radius: 20px;
-  border-bottom-right-radius: ${(props) => (props.opend ? '0px' : '20px')};
-  border-bottom-left-radius: ${(props) => (props.opend ? '0px' : '20px')};
+  border-bottom-right-radius: ${(props) => (props.$opend ? '0px' : '20px')};
+  border-bottom-left-radius: ${(props) => (props.$opend ? '0px' : '20px')};
   transition: border-radius 0.3s ease-out;
   background-color: #fffcf6;
   font-size: 20px;
@@ -82,4 +82,11 @@ export const DateInfo = styled.p`
   padding-top: 20%;
   font-size: 12px;
   color: #000;
+`
+
+export const ItemTags = styled.div`
+  grid-column: span 2;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 4px;
 `

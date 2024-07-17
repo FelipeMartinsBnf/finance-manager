@@ -117,10 +117,6 @@ export const TagsDiv = styled.div`
 `
 
 export const TagsGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-
-  span {
-    margin: 4px 10px;
-  }
+  display: flex;
+  flex-wrap: wrap;
 `

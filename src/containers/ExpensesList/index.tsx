@@ -6,7 +6,8 @@ import {
   ListItem,
   MoneyDiv,
   DataInfo,
-  DateInfo
+  DateInfo,
+  ItemTags
 } from './styles'
 import { useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
@@ -35,7 +36,7 @@ const ExpensesList = () => {
 
   const comprasAgrupadasPorData: GroupedTransactions = HistoryItens.reduce(
     (acc: GroupedTransactions, item: Transaction) => {
-      const data = FormatDate(item.dateTime).slice(0, 9) // Considerando a data no formato 'dd/mm/yyyy'
+      const data = FormatDate(item.dateTime).slice(0, 10) // Considerando a data no formato 'dd/mm/yyyy'
       if (!acc[data]) {
         acc[data] = []
       }
@@ -50,7 +51,7 @@ const ExpensesList = () => {
 
   return (
     <ExpensesL>
-      <Dropdown onClick={() => switchDropdown()} opend={dropdown}>
+      <Dropdown onClick={() => switchDropdown()} $opend={dropdown}>
         Extrato das Despesas
         <span className="material-symbols-outlined">
           {dropdown ? 'arrow_drop_up' : 'arrow_drop_down'}
@@ -82,13 +83,13 @@ const ExpensesList = () => {
                         <DateInfo>
                           {FormatDate(item.dateTime).slice(13)}
                         </DateInfo>
-                        <div>
+                        <ItemTags>
                           {GetByid(item.tagsId, Tags).map((item: tags) => (
                             <Tag key={item.id} color={item.color}>
                               {item.content}
                             </Tag>
                           ))}
-                        </div>
+                        </ItemTags>
                       </ListItem>
                     ))}
                   </div>
